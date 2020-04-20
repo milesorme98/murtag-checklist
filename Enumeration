@@ -1,0 +1,115 @@
+                                                    ENUMERATION
+--------------------------------------------------------------------------------------------------------------------------------
+
+                                                        DNS
+find ip addresses of primary name servers for domains:
+dig NS witrap.com @$ip
+
+what is the ip-v4 address of the domain:
+dig A witrap.com @$ip
+
+this command gives you the ipv6 address of a domain:
+dig AAAA witrap.com @$ip
+
+this command figures out how many mail servers a domain has:
+dig MX witrap.com @$ip
+
+this command figures out which certificate authorities can issue certificats for a domain:
+dig CAA witrap.com @$ip
+
+what is the geopraphical location of a domain:
+dig LOC witrap.com @$ip
+
+this command figures out the administrative email of witrap.com:
+dig soa witrap.com @$ip
+
+--------------------------------------------------------------------------------------------------------------------------------
+                                                         FTP
+always check for anonymous access:
+nmap -sV -sC <target>
+
+*anonymous ftp access is always bad
+*if ftp is tied to the webroot you can usually upload a shell and execute it from you browser by browsing to the path in the url
+
+nmap --script=*ftp* --script-args=unsafe=1 -p 20,21 $ip
+
+
+ftp bounce:
+nmap -vvvv -P0 -n -b 10.11.1.125A 10.11.1.125B -p-
+
+--------------------------------------------------------------------------------------------------------------------------------
+                                                        HTTP
+ask yourself:
+  what does the application do
+  what language is it written in 
+  what server software is the application running on
+  what version is the web application 
+  
+then ask yourself:
+  what is the technology stack in use
+  what is programming language and frameworks in use
+  what is the web server software 
+  what is the database software
+  what is the server operating system
+  
+banner grab:
+nmap -sV --script=banner $ip
+
+get the title of the webapp runinng check <title> tags:
+curl http://$ip/
+
+take a look at the webapp with the debugger tool
+ctrl + shift + k
+
+check if you can put files in specific directories on the web server:
+nikto -h http://$ip/Data
+
+whatweb:
+whatweb --color=never --no-errors -a 3 -v http://$ip/
+
+figure out what methods a webserver allows with nmap:
+nmap --script http-methods $ip
+
+Nikto:
+nikto  -h http://$ip/
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
