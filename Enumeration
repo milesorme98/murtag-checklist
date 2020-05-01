@@ -73,10 +73,249 @@ nmap --script http-methods $ip
 Nikto:
 nikto  -h http://$ip/
   
+always check the source code:
+ctrl u
+curl
+
+directory brute force with no recursive checks:
+dirb http://$ip/ -r 
   
-  
-  
-  
+grab all source code:
+curl -i http://$ip/
+
+grab response header:
+curl -l http://$ip/
+
+grab robots.txt;
+curl -sSik http://$ip/robots.txt
+
+web directory enum with nmap:
+nmap --script http-enum $ip
+
+grab robots.txt and filter it:
+curl -s http://$ip/robots.txt | grep Disallow | sed 's/Disallow: //'
+
+grab web page headers
+nmap --script=http-headers $ip
+
+lfi - rfi - rce test:
+uniscan -u http://192.168.44.134:10000/ -qweds
+
+find out webserver headers:
+curl --head http://$ip/
+
+figure out options a webserver allows:
+curl -i -X http://$ip/
+
+basic get request bruteforce:
+hydra -l admin -P /usr/share/metasploit-framework/data/wordlists/passwords.txt $ip http-get /Admin
+
+----------------------------------------------------- NFS -------------------------------------------------------------------
+
+scanning nfs with nmap:
+nmap -sV --script=nfs-* $ip
+nmap -sV --script=nfs-ls $ip //same result as rpcinfo
+nmap -sV --script=nfs-* $ip // all nfs scripts
+
+nmap -p 111 --script=nfs-ls $ip
+
+rpcinfo:
+rpcinfo -p $ip
+rpcclient -l $ip
+
+mount NFS share:
+mount -t nfs 192.168.1.72:/home/vulnix /tmp/mnt -nolock
+
+enumerate nfs shares:
+showmount -e $ip
+
+READ:
+https://pentestlab.blog/tag/rpc/
+
+See root squashing
+https://haiderm.com/linux-privilege-escalation-using-weak-nfs-permissions/
+
+------------------------------------------------ SMB -----------------------------------------------------------------------
+smb vuln scan:
+nmap -Pn --script=smb-vuln* $ip
+
+discover the version of samba running:
+nmap -Pn -p 139,445 -v --script="smb-protocols" -sV $ip
+
+discovering the version of samba running:
+nmap --script smb-os-discovery.nse -p 445 $ip
+
+get the os version of smba server using rpcclient:
+rpcclient -U "" -N $ip
+> srvinfo
+
+get the OS version of samba using enum4linux:
+enum4linux -o $ip
+
+find the netbios computer name of samba using nmblookup:
+nmblookup -A $ip
+
+test weather anonymous connection is allowed:
+smbclient -L $ip -N
+
+scanning for smb shares with nmap:
+nmap --script smb-enum-shares.nse -p445 $ip
+
+listing shares with enum4linux:
+enum4linux -S $ip
+
+scanning for smb shares:
+smbmap -H $ip
+
+connecting to an smbshare:
+smbclient //$ip/$share
+
+enum4linux: 
+enum4linux -a $ip
+
+get domain groups that exsist on the samba server using enum4linux:
+enum4linux -G $ip
+
+get shares:
+smbclient -L \\\\<victim-ip> -N
+
+connect to a share:
+smbclient \\\\<victim-ip>\\<share>
+
+connect to a share:
+smbclient //<victim-ip>/<share>
+
+smb os discovery:
+nmap $ip --script=smb-os-discovery
+
+nmap -sV -Pn -vv -p 445 --script='(smb*) and not (brute or broadcast or dos or external or fuzzer)' --script-args=unsafe=1 $ip
+
+enumerate hostname:
+nmblookup -A 10.11.1.115
+
+enumerate shares:
+nmap --script smb-enum-shares -p 139,445 $ip
+
+check for vulnerabilities:
+nmap --script smb-vuln* -p 139,445 10.11.1.115
+
+manually probe an smbserver:
+rpcclient -U '' $ip
+password:
+rpcclient $> srvinfo # operating system version
+rpcclient $> netshareenumall # enumerate all shares and its paths
+rpcclient $> enumdomusers # enumerate usernames defined on the server
+rpcclient $> getdompwinfo # smb password policy configured on the server
+
+----------------------------------------------------- SMTP -------------------------------------------------------------------
+smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/top-usernames-shortlist.txt -t $ip
+
+always connect with netcat to view relevant information:
+nc $ip $port
+
+enumerating users:
+connect with netcat:
+	nc $ip 25
+say helo and declare yourself:
+	HELO attacker.xyz
+verify us a user exsists dont forget the domain name:
+	VRFY admin@victim-1 (victim-1 is the domain name)
+
+what commands can be used to check the supported commands and capabilities:
+telnet 10.11.1.10 25 
+	HELO attacker.xyz
+		EHLO attacker.xyz
+			HELP
+
+bruteforce usernames:
+smtp-user-enum -U /usr/share/comix/src/txt/usernames.txt -t $ip
+
+connect to smtp service using telnet and send fake mail to a root user:
+telnet 192.186.235.3 25
+	HELO attacker.xyz
+		mail from: admin@attacker.xyz
+			rcpt to: root@victim-1
+				data
+					Subject: Hi Root
+						Hello,
+							This is a fake mail sent using telnet command.
+								From,
+									Admin
+
+send a fake mail to root user using sendmail command:
+​sendemail -f admin@attacker.xyz -t root@victim-1 -s 192.186.235.3 -u Fakemail -m "Hi root, a fake from admin" -o tls=no
+
+-------------------------------------------------------- SNMP ---------------------------------------------------------------
+
+onesixtyone -c /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings-onesixtyone.txt -dd 10.11.1.241
+
+msf > use auxiliary/scanner/snmp/snmp_login
+msf > use auxiliary/scanner/snmp/snmp_enum
+
+nmap scanning snmp
+nmap -sU -p 161 -sV -n -sC $ip
+
+nmap scanning snmp for open ports:
+nmap -sU -sV -p 262 -n $ip --script="snmp-netstat" --script-args="snmpcommunity=$password"
+
+nmap scanning snmp for running processes:
+nmap -sU -sV -p- 161 -n $ip --script="snmp=processes" --script-args="snmpcommunity=$password-string"
+
+bruteforcing community strings with snmp-brute.nse:
+nmap -sU --script snmp-brute <target> [--script-args snmp-brute.communitiesdb=<wordlist> ]
+
+snmp-check 192.168.1.2 -c public
+
+snmpget -v 1 -c public IP
+
+snmpwalk -v 1 -c public IP
+
+snmpbulkwalk -v2c -c public -Cn0 -Cr10 IP
+
+onesixtyone -c /usr/share/wordlists/dirb/small.txt 192.168.1.200 // find communities with bruteforce
+
+for i in $(cat /usr/share/wordlists/metasploit/unix_users.txt);do snmpwalk -v 1 -c $i 192.168.1.200;done| grep -e "Timeout" // find communities with bruteforce
+
+snmpcheck -t $ip -c public/private
+
+snmpwalk -c public -v1 $ip 1|
+
+snmpenum -t $ip
+
+onesixtyone -c names -i hosts
+
+SNMPv3 Enumeration
+nmap -sV -p 161 --script=snmp-info $ip/24
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
   
