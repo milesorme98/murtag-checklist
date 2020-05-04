@@ -3,38 +3,31 @@ Starting with domain enumeration you want to map various entities, trusts, relat
 Domain enumeration with Powerview and AD-module
 
 Get current domain
-
 Get-NetDomain (powerview)
 Get-ADDomain (AD-module)
 
 Get object of another domain
-
 Get-NetDomain -Domain moneycorp.local
 Get ADDomain - Identity moneycorp.local
 
 Get domain SID for the current domain
-
 Get-DomainSID
 (Get-ADDomain).DomainSIDGet-NetDomain
 
 Domain enumeration with Powerview and AD-module
 
 Get domain policy for the current domain (useful for enumerating password policy)
-
 Get-DomainPolicy
 (Get-DomainPolicy).”system access”
 
 Get domain policy for another domain
-
 (Get-DomainPolicy -domain moneycorp.local).”system access”
 
 Get domain controllers for the current domain
-
 Get-NetDomainController
 Get-ADDomainController
 
 Get domain controllers for another domain 
-
 Get-NetDomainController -Domain moneycorp.local
 Get-ADDomainController -DomainName moneycorp.local - Discover
 
@@ -50,7 +43,6 @@ Get-ADUser -Filter * -Properties *
 Get-ADUser -Identity student1 -Properties *
 
 Get List of all properties for users in the current domain
-
 Get -UserProperty
 Get -UserProperty -Properties pwdlastset
 
@@ -68,13 +60,10 @@ Find-UserFiled -SearchField Description -SearchTerm “built” PV
 You can also enter other things in the above command in the “” marks such as password ect
 
 to list specific propert of all the users say samaccountname
-
 Get-NetUser | select -ExpandProperty samaccountname
-
-
 ------------------------------------------------------------------------------------------------------------------------------
-Get a list of computers in the current domain
 
+Get a list of computers in the current domain
 Get-NetComputer
 Get-NetComputer -OperatingSystem “*Server 2016*” 
 (finds all the computers in a domain with server 2016 OS)
@@ -89,11 +78,9 @@ Another way of getting the operating system for computers in the domain
 Once we have the basic information, user information, and the computer information we can move ahead and start enumerating groups in the current domain.
 
 Get all the groups in the current domain
-
 Get-NetGroup
 
 Provides a list of all domain groups
-
 Get-NetGroup -Domain <targetdomain>
 Get-NetGroup -FullData
 Get-ADGroup -Filter * | select Name
@@ -103,19 +90,19 @@ Get-NetGroup ‘Domain Admins’ -FullData
 The above command is how you extract all data just about one group 
 
 Get all groups containing the word “admin” in group name
-
 Get-NetGroup *admin*
 Get-ADGroup -Filter ‘Name -Like “*admin*”’ | select name
 
 What if we want to retrieve the memberships of the groups 
 
 Get all the members of the Domain Admins group
-
 Get-NetGroupMember -GroupName “Domain Admins” -Recurse
 Get-ADGroupMember -Identity “Domain Admins” -Recursive
 
-Get the group membership for a user
+to enumerate members of the enterprise admins group
+Get-NetGroupMember -GroupName "Enterprise Admins"
 
+Get the group membership for a user
 Get-NetGroup -Username “student1”
 Get-ADPrincipalGroupMembership _Identity student1
 
