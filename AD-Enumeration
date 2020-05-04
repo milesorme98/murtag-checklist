@@ -101,6 +101,7 @@ Get-ADGroupMember -Identity “Domain Admins” -Recursive
 
 to enumerate members of the enterprise admins group
 Get-NetGroupMember -GroupName "Enterprise Admins"
+Get-NetGroupMember -GroupName "Enterpise Admins" -Domain moneycorp.local
 
 Get the group membership for a user
 Get-NetGroup -Username “student1”
