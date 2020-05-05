@@ -134,10 +134,35 @@ Invoke-FileFinder -Verbose
 
 Get all FileServers of the domain 
 Get-NetFileServer
+------------------------------------------------------------------------------------------------------------------------------
+Get List of GPO in current domain
+Get-NetGPO
+Get-NetGPO -ComputerName dcorp-student1.dollarcorp.moneycorp.local
+Get-GPO -All
 
+Get GPO’s which use restricted groups or groups.xml for interesting users
+Get-NetGPOGroup
 
+Get users which are in a local group of a machine using GPO
+Find-GPOComputerAdmin -Computername dcorp-student1.dollarcorp.moneycorp.local
 
+Get machines where the given user is a member of a a specific group
+Find-GPOLocation -Username student1 -Verbose 
 
+Get OUs in a domain 
+Get-NetOU -FullData
+
+to look for membership of the group "RDPUsers" we can use the Get-NetGroupMember:
+Get-NetGroupMember -GroupName RDPUsers
+
+Use Get-NetOU to list all the OU's
+Get-NetOU
+
+to list all the computers in the StudentsMachines OU:
+Get-NetOU StudentMachines | %{Get-NetComputer -ADSPath $_}
+
+to list the GPOs:
+Get-NETGPO
 
 
 
