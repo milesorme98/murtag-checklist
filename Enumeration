@@ -110,6 +110,23 @@ curl -i -X http://$ip/
 basic get request bruteforce:
 hydra -l admin -P /usr/share/metasploit-framework/data/wordlists/passwords.txt $ip http-get /Admin
 
+---------------------------------------------------WordPress------------------------------------------------------------------
+enumerate Wordpress users
+wpscan --url http://10.10.10.2 --enumerate u
+
+bruteforce Wordpress user's password
+wpscan --url 10.10.10.2/secret --wordlist /usr/share/wordlists/dirb/big.txt --threads 2
+
+wpscan --url http://$ip/ --enumerate ap,at,cb,dbe -o wpscan-enum.txt
+
+nmap -sV --script http-wordpress-enum <target>
+
+dirb http://10.11.1.234/ -w /usr/share/seclists/Discovery/Web-Content/CMS/wordpress.fuzz.txt
+
+wpscan bruteforce:
+wpscan --url http://10.11.1.234/wp-login --usernames Core,Backup,admin --passwords /usr/share/wordlists/rockyou.txt
+
+wpscan --url http://10.141.1.251/wp --enumerate vp,u,vt --plugins-detection aggressive
 ----------------------------------------------------- NFS -------------------------------------------------------------------
 
 scanning nfs with nmap:
