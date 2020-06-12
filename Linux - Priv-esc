@@ -5,3 +5,10 @@ ps -ef
 see what cron jobs are scheduled by the user:
 crontab -l
 -------------------------------------------------------------------------------------------------------------------------------
+File permissions 
+
+the following command will look for files (and not symlinks etc) which is world writeable:
+find / -not -type l -perm o+w
+
+use open ssl to generate password entries:
+openssl passwd -1 -salt abc password
