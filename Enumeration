@@ -304,7 +304,9 @@ onesixtyone -c names -i hosts
 SNMPv3 Enumeration
 nmap -sV -p 161 --script=snmp-info $ip/24
 
-
+------------------------------------------------ Mysql -----------------------------------------------------------------------
+we can access a remote mysql database with this command:
+mysql -h 192.154.94.3 -u root -ppassword
 
 
 
