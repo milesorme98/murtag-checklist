@@ -308,6 +308,9 @@ nmap -sV -p 161 --script=snmp-info $ip/24
 we can access a remote mysql database with this command:
 mysql -h 192.154.94.3 -u root -ppassword
 
+within a mysql shell MYSQL > we can enumerate the target server arch and OS name with this command:
+show variables like '%compile%';
+
 
 
 
