@@ -4,7 +4,7 @@ ps -ef
 
 see what cron jobs are scheduled by the user:
 crontab -l
-
+-----------------
                                                  File permissions 
 
 the following command will look for files (and not symlinks etc) which is world writeable:
@@ -13,7 +13,7 @@ find / -not -type l -perm o+w
 use open ssl to generate password entries:
 openssl passwd -1 -salt abc password
 
-
+-------------------
                                             Understanding permissions in linux 
 
 At a basic level permissions in linux are a relationship between users, groups, and files & directories.
@@ -78,6 +78,44 @@ Setgid (SGID) bit
 when set on a file, the file will get executed with the privieleges of the file group
 
 when set on  directory, files created within that directory will inherit the group of the directory itself
+-------------------------------------
+KERNEL EXPLOITS
+
+Kernels are the core of any OS
+
+think of it as a layer between application software and the actual compiter hardware
+
+the kernel has complete control over the operation system. Exploiting a kernel vuln can result in execution as the root user
+
+1. enumerate kernel version (uname -a)
+2. find matching exploits on google, exploitdb, Github
+3. compile and run
+
+searching for kernel exploits with searchsploit example:
+searchsploit linux kernel 2.6.32 priv esc
+
+searchsploit example to get correct distro in the results:
+searchsploit linux kernel 2.6 debian priv esc
+
+SCRIPTS FOR EXPLOITING KERNEL VULNERABILITIES:
+linux-exploit-suggester.sh
+----------------------------------------------------
+Service Exploits
+
+services are simply programs that run in the background, accepting input or performing regular tasks
+
+if vulnerable services are running as root, exploiting them can lead to command execution as root
+
+service exploits can be found using Searchsploit, Google, and Github, just like with kernel exploits
+
+
+
+
+
+
+
+
+
 
 
 
