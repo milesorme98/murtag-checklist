@@ -1,14 +1,106 @@
----------------------------------------------------CRON JOBS-------------------------------------------------------------------
+                                                   CRON JOBS
 see if cron jobs are runnng: (by looking into the process's)
 ps -ef
 
 see what cron jobs are scheduled by the user:
 crontab -l
--------------------------------------------------------------------------------------------------------------------------------
-File permissions 
+
+                                                 File permissions 
 
 the following command will look for files (and not symlinks etc) which is world writeable:
 find / -not -type l -perm o+w
 
 use open ssl to generate password entries:
 openssl passwd -1 -salt abc password
+
+
+                                            Understanding permissions in linux 
+
+At a basic level permissions in linux are a relationship between users, groups, and files & directories.
+
+Users can belong to multiple groups
+
+groups can have multiple users
+
+every file and directory defines its permissions in terms of a user, a group, and others (all other users)
+
+USERS:
+
+user accounts are configured in the /etc/passwd file
+
+user password hashes are stored in the /etc/shadow file
+
+users are identified by an integer user ID (UID)
+
+the "root" user account is a special type of account in linux. it has a UID of 0, and th system grants this use access to
+every file
+
+command chown: to change the owner and group of the file
+command chmod: to change file permissions
+
+SETUID BIT:
+the setuid bit indicates that when running the executable it will set its permissions to that of its owner instead of setting
+it to the user who launched it. 
+
+GROUPS:
+
+groups are configured in the /etc/group file
+
+users have a primary group and can have multiple secondary or suplementary groups
+
+By default, a user's primary group has the same name as their user account
+
+FILES AND DIRECTORIES
+
+All Files and directories have a single owner and group
+
+Permissions are defined in terms of read, write, and execute operations.
+
+There are three sets of permissions, one for the owner, one for the group, and one for all "other" users
+(can also be reffered to as "world")
+
+only the owner can change permissions
+
+DIRECTORY PERMISSIONS
+
+Execute - when set, the directory can be entered. Without this permission, neither the read nor write permissions will work
+
+Read - when set, the directory contents can be listed
+
+Write - when set, files and subdirectories can be created in the directory 
+
+SPECIAL PERMISSIONS
+
+setuid (SUID) bit
+when set files will get executed with the privileges of the file owner.
+
+Setgid (SGID) bit
+when set on a file, the file will get executed with the privieleges of the file group
+
+when set on  directory, files created within that directory will inherit the group of the directory itself
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
