@@ -25,17 +25,48 @@ dig soa witrap.com @$ip
 
 --------------------------------------------------------------------------------------------------------------------------------
                                                          FTP
+The File Transfer Protocol (FTP) is a standard network protocol used for the transfer of computer files between a client and server on a computer network.
+It is a plain-text protocol that uses as new line character 0x0d 0x0a so it's important to connect using telnet instead of nc.
+
+banner grabbing:
+telnet -vn <IP> 21
+
 always check for anonymous access:
 nmap -sV -sC <target>
+
+anonymous login:
+>ls -a # List all files (even hidden) (yes, they could be hidden)
+>binary #Set transmission to binary instead of ascii
+>ascii #Set transmission to ascii instead of binary
+>bye #exit
+
+download all files from ftp:
+wget -m ftp://anonymous:anonymous@10.10.10.98 #Donwload all
+wget -m --no-passive ftp://anonymous:anonymous@10.10.10.98 #Download all
 
 *anonymous ftp access is always bad
 *if ftp is tied to the webroot you can usually upload a shell and execute it from you browser by browsing to the path in the url
 
 nmap --script=*ftp* --script-args=unsafe=1 -p 20,21 $ip
 
+some ftp commands:
+
+USER username
+PASS password
+HELP The server indicates which commands are supported
+PORT 127,0,0,1,0,80This will indicate the FTP server to establish a connection with the IP 127.0.0.1 in port 80 (you need to put the 5th char as "0" and the 6th as the port in decimal or use the 5th and 6th to express the port in hex).
+EPRT |2|127.0.0.1|80|This will indicate the FTP server to establish a TCP connection (indicated by "2") with the IP 127.0.0.1 in port 80. This command supports IPv6.
+LIST This will send the list of files in current folder
+APPE /path/something.txt This will indicate the FTP to store the data received from a passive connection or from a PORT/EPRT connection to a file. If the filename exists, it will append the data.
+STOR /path/something.txt Like APPE but it will overwrite the files
+STOU /path/something.txt Like APPE, but if exists it won't do anything.
+RETR /path/to/file A passive or a port connection must be establish. Then, the FTP server will send the indicated file through that connection
+REST 6 This will indicate the server that next time it send something using RETR it should start in the 6th byte.
+TYPE i Set transfer to binary
 
 ftp bounce:
 nmap -vvvv -P0 -n -b 10.11.1.125A 10.11.1.125B -p-
+
 
 --------------------------------------------------------------------------------------------------------------------------------
                                                         HTTP
@@ -311,9 +342,20 @@ mysql -h 192.154.94.3 -u root -ppassword
 within a mysql shell MYSQL > we can enumerate the target server arch and OS name with this command:
 show variables like '%compile%';
 
+------------------------------------------------------ SSH -------------------------------------------------------------------
+banner grabbing:
+nc -vn <IP> 22
 
+public ssh key of server
+ssh-keyscan -t rsa <IP> -p <PORT>
 
-
+config files:
+ssh_config
+sshd_config
+authorized_keys
+ssh_known_hosts
+known_hosts
+id_rsa
 
 
 
