@@ -1,0 +1,7 @@
+#Nmap scripts ((default or version) and smb))
+
+nmap --script-help "(default or version) and *smb*"
+
+locate -r '\.nse$' | xargs grep categories | grep 'default\|version\|safe' | grep smb
+
+nmap --script-help "(default or version) and smb)"
