@@ -1,0 +1,110 @@
+ask yourself:
+  what does the application do
+  what language is it written in 
+  what server software is the application running on
+  what version is the web application 
+  
+then ask yourself:
+what is the technology stack in use
+what is programming language and frameworks in use
+what is the web server software 
+what is the database software
+what is the server operating system
+
+In this methodology we are going to suppose that you are going to a attack a domain (or subdomain) and only that. So, you should apply 
+this methodology to each discovered domain, subdomain or IP with undetermined web server inside the scope.
+
+Start by identifying the technologies used by the web server. Look for tricks to keep in 
+mind during the rest of the test if you can successfully identify the tech.
+
+Any known vulnerability of the version of the technology?
+
+Using any well known tech? Any useful trick to extract more information?
+
+Any specialised scanner to run (like wpscan)?
+
+Any vulnerable cookie? JWT?
+
+Check for vulnerable proxies being used (Test this in every new tech discovered in the webapp)
+
+Launch general purposes scanners. You never know if they are going to find something or if the are going to find some interesting information.
+
+Start with the initial checks: robots, sitemap, 404 error and SSL/TLS scan (if HTTPS).
+
+Start spidering the web page: It's time to find all the possible files, folders and parameters being used. Also, check for special findings.
+
+Note that anytime a new directory is discovered during brute-forcing or spidering, it should be spidered.
+
+Directory Brute-Forcing: Try to brute force all the discovered folders searching for new files and directories. 
+
+Note that anytime a new directory is discovered during brute-forcing or spidering, it should be Brute-Forced.
+
+Backups checking: Test if you can find backups of discovered files appending common backup extensions.
+
+Brute-Force parameters: Try to find hidden parameters.
+
+Once you have identified all the possible endpoints accepting user input, check for all kind of vulnerabilities related to it.
+
+This is by far the most complex part of pentesting web, and depending of the vulnerability 
+the pentester should know how to discover it. In this book you can find explained a lot of web vulnerabilities related to user input.  
+
+banner grab:
+nmap -sV --script=banner $ip
+
+get the title of the webapp runinng check <title> tags:
+curl http://$ip/
+
+take a look at the webapp with the debugger tool
+ctrl + shift + k
+
+check if you can put files in specific directories on the web server:
+nikto -h http://$ip/Data
+
+whatweb:
+whatweb --color=never --no-errors -a 3 -v http://$ip/
+
+figure out what methods a webserver allows with nmap:
+nmap --script http-methods $ip
+
+Nikto:
+nikto  -h http://$ip/
+  
+always check the source code:
+ctrl u
+curl
+
+directory brute force with no recursive checks:
+dirb http://$ip/ -r 
+  
+grab all source code:
+curl -i http://$ip/
+
+grab response header:
+curl -l http://$ip/
+
+grab robots.txt;
+curl -sSik http://$ip/robots.txt
+
+web directory enum with nmap:
+nmap --script http-enum $ip
+
+grab robots.txt and filter it:
+curl -s http://$ip/robots.txt | grep Disallow | sed 's/Disallow: //'
+
+grab web page headers
+nmap --script=http-headers $ip
+
+lfi - rfi - rce test:
+uniscan -u http://192.168.44.134:10000/ -qweds
+
+find out webserver headers:
+curl --head http://$ip/
+
+figure out options a webserver allows:
+curl -i -X http://$ip/
+
+basic get request bruteforce:
+hydra -l admin -P /usr/share/metasploit-framework/data/wordlists/passwords.txt $ip http-get /Admin
+
+IIS tricks
+https://book.hacktricks.xyz/pentesting/pentesting-web/iis-internet-information-services
