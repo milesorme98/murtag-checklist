@@ -108,3 +108,22 @@ hydra -l admin -P /usr/share/metasploit-framework/data/wordlists/passwords.txt $
 
 IIS tricks
 https://book.hacktricks.xyz/pentesting/pentesting-web/iis-internet-information-services
+
+PHP tricks:
+https://book.hacktricks.xyz/pentesting/pentesting-web/php-tricks-esp
+
+CGI tricks:
+https://book.hacktricks.xyz/pentesting/pentesting-web/cgi
+
+Drupal tricks:
+https://book.hacktricks.xyz/pentesting/pentesting-web/drupal
+
+wordpress tricks:
+https://book.hacktricks.xyz/pentesting/pentesting-web/wordpress
+
+general purpose automatic scanners:
+nikto -h <URL>
+whatweb -a 4 <URL>
+wapiti -u <URL>
+W3af
+
