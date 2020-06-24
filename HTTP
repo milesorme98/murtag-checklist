@@ -109,6 +109,8 @@ hydra -l admin -P /usr/share/metasploit-framework/data/wordlists/passwords.txt $
 IIS tricks
 https://book.hacktricks.xyz/pentesting/pentesting-web/iis-internet-information-services
 
+IIS SERVERS RUN WITH .ASP EXTENSIONS
+
 PHP tricks:
 https://book.hacktricks.xyz/pentesting/pentesting-web/php-tricks-esp
 
