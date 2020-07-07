@@ -61,6 +61,10 @@ IF WE CAN SOMEHOW WRITE OUR USER ON THE BOX INTO THE /ETC/SUDOERS WITH NO PASSWO
 entry in sudoers file: student ALL(ALL) NOPASSWD:ALL
 command: sudo /bin/bash
 
+this command will look for files which is world writeable:
+find / -not -type l -perm -o+w
+
+
 
 
 
