@@ -245,6 +245,9 @@ https://haiderm.com/linux-privilege-escalation-using-weak-nfs-permissions/
 smb vuln scan:
 nmap -Pn --script=smb-vuln* $ip
 
+enumerate shares with nmap:
+nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse $ip
+
 discover the version of samba running:
 nmap -Pn -p 139,445 -v --script="smb-protocols" -sV $ip
 
@@ -272,6 +275,9 @@ enum4linux -S $ip
 
 scanning for smb shares:
 smbmap -H $ip
+
+Downloadig files from a share:
+smbget -R smb://<ip>/anonymous
 
 connecting to an smbshare:
 smbclient //$ip/$share
