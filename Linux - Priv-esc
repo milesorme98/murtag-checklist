@@ -108,6 +108,18 @@ if vulnerable services are running as root, exploiting them can lead to command 
 
 service exploits can be found using Searchsploit, Google, and Github, just like with kernel exploits
 
+-----------------------------------------------------
+WEAK FILE PERMISSIONS 
+
+certain system fies can be takn advantage of to perform privilege escalation if the permissions on them are too weak
+
+if a system file has confidential information we can read, it may be used to gain access to the root account.
+
+if a system file can be written to we may be able to modify the way the operating system works and gain root access that way
+
+
+
+
 
 
 
