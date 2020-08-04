@@ -239,6 +239,11 @@ rpcclient -l $ip
 mount NFS share:
 mount -t nfs 192.168.1.72:/home/vulnix /tmp/mnt -nolock
 
+mounting an NFS share step by step:
+mkdir /mnt/kenobiNFS
+mount machine_ip:/var /mnt/kenobiNFS
+ls -la /mnt/kenobiNFS
+
 enumerate nfs shares:
 showmount -e $ip
 
