@@ -229,6 +229,9 @@ nmap -sV --script=nfs-* $ip // all nfs scripts
 
 nmap -p 111 --script=nfs-ls $ip
 
+Enumerating NFS with Nmap:
+nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount $ip
+
 rpcinfo:
 rpcinfo -p $ip
 rpcclient -l $ip
