@@ -126,6 +126,55 @@ if we are able o read the contents of the /etc/shadow file, we might be able to 
 
 if we are able to modify the /etc/shadow file we can replace the rot user's password hash with one we know.
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                    SUDO
+                                                                    
+sudo is a program which lets users run other programs with the security privileges of other users. By default that oher user will be root
+
+A user generally needs to enter their password to use sudo and they must be permitted access via rules in the /etc/sudoers file.
+
+Rules can be used to limit users to certain programs and forgo the password entry requirment 
+
+
+By far the most obvious privelage escalation with sudo is to use suda as it was intended
+
+if your low privelege user account can use sudo unrestricted (meaning you can run any programs) and you know the users password, privilege escalation is easy
+by using the "switch user" su command to spawn a root shell
+
+if for some reason the su program is not allowed there are many other ways to escalate privileges:
+sudo -s
+sudo -i 
+sudo /bin/bash
+sudo passwd
+
+even if there are "no obvious" methods for escalating privileges we may be able to use a shell escape sequence
+
+even if we are restricted to running certain programs via sudo it is sometimes possible to "escape" the program and spawn a shell
+
+since the inital program runs with root privileges so does the spawned shell
+
+SHELL ESCAPE SEQUENCES:
+https://gtfobins.github.io/
+
+ABUSING SUDO INTENDED FUNCTIONALITY
+
+if a program doesnt have an escape sequence it may still be possible to use it to escalate privileges
+
+if we can read files owned by root we may be able to ectract usefull information 
+
+if we can write to files owned by root we may be able to insert or modify information 
+
+SUDO ABUSE WITH APACHE
+
+run the command:
+sudo -l 
+(if you see the output (root) NOPASSWD: /usr/sbin/apache2) this technique will probably work. 
+
+now run the command:
+sudo apache2 -f /etc/shadow
+(copy the root users password hash and see if you can crack the hash)
+
+
 
 
 
