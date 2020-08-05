@@ -203,6 +203,37 @@ sudo must be configured to preserve the LD_PRELOAD environment variable using th
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                   CRON JOBS
 
+cron jobs are programs or scripts which users can schedual to run at specific times ot intervals 
+
+cron jobs run with the security level of the user who owns them 
+
+by default cron jobs run using the /bin/sh shell, with limited environment variables
+
+Cron table files or crontabs store the configuration for cron jobs
+
+user crontabs are usually located in /var/spool/cron or /var/spool/cron/crontabs/
+
+the system wide crontab is located at /etc/crontab
+
+CRON JOBS AND FILE PERMISSIONS
+
+misconfigurations of file permissions associated ih cron jobs can lead to easy privilege escalation 
+
+if we can write to a program or script which gets run a part of a cron job we can replace it with our own code
+
+the easiest example of the is a .sh cron job with writeable permissions and we overwrite that file with a reverse shell and wait for it to run 
+
+CRONTAB PATH ENVIRONMENT VARIABLE
+
+the crontab PATH environment variable is by default set to "/usr/bin:/bin"
+
+the PATH variable can be overwritten in the crontab file 
+
+if a cron job program/script does not use an apsolut path and one of the PATH directories is writeable by our user, we may be able to creat a program/script
+with the same name as the cron job 
+
+
+
 
 
 
