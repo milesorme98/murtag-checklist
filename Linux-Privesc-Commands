@@ -73,21 +73,7 @@ command: sudo /bin/bash
 this command will look for files which is world writeable:
 find / -not -type l -perm -o+w
 
-WEAK FILE PERMISSIONS
 
-Certain system files can be taken advanatge of to perform priv esc if the permissions on them are too weak
-
-if a system file has confidential info we can read it may be used to gain acccess to the root account 
-
-if a system file can be written to we may be able to modify tthe way the operating system works and gain root acccess that way.
-
-/ETC/SHADOW
-
-the /etc/shadow file contains user password hashes, and by default is not readable by any user except for root.
-
-if we are able o read the contents of the /etc/shadow file, we might be able to crack the root user's password hash.
-
-if we are able to modify the /etc/shadow file we can replace the rot user's password hash with one we know.
 
 
 
