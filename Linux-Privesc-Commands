@@ -73,6 +73,31 @@ command: sudo /bin/bash
 this command will look for files which is world writeable:
 find / -not -type l -perm -o+w
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                          SUDO
+run a program using sudo:
+sudo <program>:
+
+run a program as a specific user:
+sudo -u <username> <program>
+
+List programs a user is allowed (amd disallowed to run:
+sudo -l 
+
+spawning a root shell: 
+sudo su
+
+if the su progam is not allowed:
+sudo -s
+sudo -i 
+sudo /bin/bash
+sudo passwd
+
+shell escape sequences:
+https://gtfobins.github.io/
+
+
+
 
 
 
