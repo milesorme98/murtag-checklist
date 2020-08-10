@@ -13,6 +13,17 @@ find / -not -type l -perm o+w
 use open ssl to generate password entries:
 openssl passwd -1 -salt abc password
 
+there are three types of file permissions in unix
+
+Read (r)  permission to read the file
+write (w) permission to modify the file
+execute (x) permission to Execute/Run the file 
+
+The users are classified in UGO
+U - User
+G - Group
+O - others
+
 -------------------
                                             Understanding permissions in linux 
 
