@@ -105,7 +105,20 @@ sudo -V | grep "Sudo ver" | grep "1.6.8p9\|1.6.9p18\|1.8.14\|1.8.20\|1.6.9p21\|1
 figure out what cronjobs your user has access to:
 crontab -l 
 
-cront
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                      File Permissions
+there are three types of file permissions in unix
+
+Read (r)  permission to read the file
+write (w) permission to modify the file
+execute (x) permission to Execute/Run the file 
+
+The users are classified in UGO
+U - User
+G - Group
+O - others
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
