@@ -1,0 +1,3 @@
+Enable smb1 with powershell:
+Enable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol-Client" -ALL
+
