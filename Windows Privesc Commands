@@ -1,1 +1,38 @@
+                                                                      POWERUP
+Powerup is a tool that can help you find privilege escalation vulnerabilities
+
+enter powershell:
+powershell -exec bypass
+
+run the powerup script:
+. ./Powerup.psq
+
+then run the invoke all checks function:
+Invoke-AllChecks
+
+
+                                                                     SEATBELT
+seatbelt is another script for trying to find privilege escalation vulnerabilities 
+
+if you just wanted seatbelt to list non-standard services:
+.\Seatbelt.exe NonstandardServices
+
+run all enumeration checks seatbelt has to offer
+.\Seartbelt.exe all
+
+                                                                    WINPEAS
+
+winPEAS is a very powerfull tool that not only aactively hunts for privilege escalation misconfigurations but highlights them for the user in the results
+
+before running winPEAS add the following registry key:
+reg add HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1
+
+look at the different type of checks winpeas can do:
+./winPEASany.exe -h
+
+                                                                 ACCESSCHK.EXE
+                                                                 
+accessChk is an old but still trustworhy tool for checking user access control rights
+
+you can use it to check weather a user or group has access to files, directories, services and registry keys.
 
