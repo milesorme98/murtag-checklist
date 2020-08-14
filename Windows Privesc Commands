@@ -57,6 +57,18 @@ steps to take to identify potential kernel exploits:
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                           SERVICE EXPLOITS
+query the configuration of a service:
+sc.exe qc <name>
+
+query the current satus of a service
+sc.exe query <name>
+
+modify a configuration option of a service:
+sc.exe config <name> <option>= <value>
+
+Start/Stop a service:
+net start/strop <name>
+
 
 
 
