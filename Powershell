@@ -1,3 +1,37 @@
+common verbs to use include
+- get
+- start
+- stop
+- read
+- write
+- new
+- out
+
+Get-Help displays information about a cmdlet. To get help about a particular command, run the following:
+Get-Help Command-Name
+
+you can also understand how exactly to use the command by passing the -examples flag:
+Get-Help Get-Command -Examples
+
+Get-Command gets all the cmdlets installed in the current computer. the great thing about this cmdlet is that is allows for pattern matching like the following:
+Get-Command Verb-* 
+Get-Command *-Noun
+
+Run below command to view all the cmdlets for the verb new displays the folowing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Enable smb1 with powershell:
 Enable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol-Client" -ALL
 
