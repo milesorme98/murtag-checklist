@@ -294,7 +294,15 @@ python2 pwdump.py /tools/SYSTEM /tools/SAM
 crack the admin hashes or user hashes using hashdump
 hashcat -m 1000 --force hash /usr/share/wordlists/rockyou.txt
 
-                                                                        Passing the Hash
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                   Scheduled Tasks
+
+list all scheduled tasks your user can see:
+schtasks /query /fo LIST /v
+
+in powershell: 
+Get-ScheduledTask | where {$_.TaskPAth -notlike "\Microsoft*"} | ft TaskName,TaskPath,State 
+ 
 
 
 
