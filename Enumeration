@@ -75,10 +75,13 @@ some ftp commands:
 USER username
 PASS password
 HELP The server indicates which commands are supported
-PORT 127,0,0,1,0,80This will indicate the FTP server to establish a connection with the IP 127.0.0.1 in port 80 (you need to put the 5th char as "0" and the 6th as the port in decimal or use the 5th and 6th to express the port in hex).
-EPRT |2|127.0.0.1|80|This will indicate the FTP server to establish a TCP connection (indicated by "2") with the IP 127.0.0.1 in port 80. This command supports IPv6.
+PORT 127,0,0,1,0,80This will indicate the FTP server to establish a connection with the IP 127.0.0.1 in port 80 
+(you need to put the 5th char as "0" and the 6th as the port in decimal or use the 5th and 6th to express the port in hex).
+EPRT |2|127.0.0.1|80|This will indicate the FTP server to establish a TCP connection (indicated by "2") 
+with the IP 127.0.0.1 in port 80. This command supports IPv6.
 LIST This will send the list of files in current folder
-APPE /path/something.txt This will indicate the FTP to store the data received from a passive connection or from a PORT/EPRT connection to a file. If the filename exists, it will append the data.
+APPE /path/something.txt This will indicate the FTP to store the data received from a passive connection or from a PORT/EPRT connection to a file. 
+If the filename exists, it will append the data.
 STOR /path/something.txt Like APPE but it will overwrite the files
 STOU /path/something.txt Like APPE, but if exists it won't do anything.
 RETR /path/to/file A passive or a port connection must be establish. Then, the FTP server will send the indicated file through that connection
@@ -220,8 +223,14 @@ wpscan bruteforce:
 wpscan --url http://10.11.1.234/wp-login --usernames Core,Backup,admin --passwords /usr/share/wordlists/rockyou.txt
 
 wpscan --url http://10.141.1.251/wp --enumerate vp,u,vt --plugins-detection aggressive
------------------------------------------------------ NFS -------------------------------------------------------------------
 
+--------------------------------------------------------------------- Drupal ---------------------------------------------------
+
+to enumerate drupal use droopescan:
+./droopescan --help
+
+
+----------------------------------------------------- NFS -------------------------------------------------------------------
 scanning nfs with nmap:
 nmap -sV --script=nfs-* $ip
 nmap -sV --script=nfs-ls $ip //same result as rpcinfo
