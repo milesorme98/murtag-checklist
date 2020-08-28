@@ -229,6 +229,8 @@ wpscan --url http://10.141.1.251/wp --enumerate vp,u,vt --plugins-detection aggr
 to enumerate drupal use droopescan:
 ./droopescan --help
 
+./droopescan scan drupal -u $ip
+
 
 ----------------------------------------------------- NFS -------------------------------------------------------------------
 scanning nfs with nmap:
