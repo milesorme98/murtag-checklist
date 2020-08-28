@@ -231,6 +231,9 @@ to enumerate drupal use droopescan:
 
 ./droopescan scan drupal -u $ip
 
+one of the default files in drupal is changelog.txt browse it and you could get the version:
+http://10.10.10.9/CHANGELOG.txt
+
 
 ----------------------------------------------------- NFS -------------------------------------------------------------------
 scanning nfs with nmap:
