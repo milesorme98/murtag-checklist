@@ -128,7 +128,7 @@ finally sart the service:
 net start <service>
 
 PRIVESC DONE
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                   Weak Registry permissions
 first run winpeas to see if there is weak registry permissions:
 winPEASany.exe quiet servicesinfo
@@ -159,6 +159,7 @@ net start <service>
 
 PRIVESC DONE
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                        Insecure Service Executable
                                                                        
 run this winpeas command to find insecure service executables:
@@ -303,7 +304,9 @@ schtasks /query /fo LIST /v
 in powershell: 
 Get-ScheduledTask | where {$_.TaskPAth -notlike "\Microsoft*"} | ft TaskName,TaskPath,State 
  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+                                                                   Insecure GUI apps
 
 
 
