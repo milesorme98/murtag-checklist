@@ -385,7 +385,9 @@ SMBMAP
 Smbmap -H 10.10.10.100 list all the file shares and what permissions we have 
 
 Smbmap -F will help you search for strings in files
-Smbmap -R searches through every directory 
+
+list the folders in a share:
+smbmap -R <share> -H $ip
 
 will list the files in the replication share 
 Smbmap -R Replication -H 10.10.10.100 
