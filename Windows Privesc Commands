@@ -1,3 +1,53 @@
+System Enumeration
+
+enumerate the system:
+systeminfo
+
+enumerate the OS - OS Version - and system type:
+systeminfo | findstr /B /C:"OS Name" /c:"OS Version" /C:"System Type"
+
+check when the system was last patched: 
+wmic qfe
+
+list out the drives:
+wmic logicaldisk get caption,description,providername
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+User Enumeration
+
+figure out what user we are on the box:
+whoami
+
+see what our users privileges are:
+whoami /priv
+
+figure out what groups our user is in:
+whoami /groups
+
+figure out what users are on the machine:
+net user
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 POWERUP
 
@@ -7,7 +57,7 @@ enter powershell:
 powershell -exec bypass
 
 run the powerup script:
-. ./Powerup.psq
+. ./Powerup.ps1
 
 then run the invoke all checks function:
 Invoke-AllChecks
@@ -28,7 +78,7 @@ run all enumeration checks seatbelt has to offer
 
 WINPEAS
 
-winPEAS is a very powerfull tool that not only aactively hunts for privilege escalation misconfigurations but highlights them for the user in the results
+winPEAS is a very powerfull tool that not only aactively hunts for privilege escalation misconfigurations but highlights them for you in the results
 
 before running winPEAS add the following registry key:
 reg add HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1
