@@ -30,6 +30,17 @@ net user
 check out what groups your user is in:
 whoami /groups
 
+figure out what users are on the machine:
+net user 
+
+figure out information about a specific user:
+net user <user>
+
+look at the local groups:
+net localgroup
+
+net localgroup administrators
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
