@@ -27,6 +27,9 @@ whoami /groups
 figure out what users are on the machine:
 net user
 
+check out what groups your user is in:
+whoami /groups
+
 
 
 
