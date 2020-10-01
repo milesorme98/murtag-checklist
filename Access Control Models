@@ -1,0 +1,18 @@
+Access Control Models
+controlling access means reulating who is authorized to tak a particular action, whether viewing/modifying files or accessing certain physical locations
+
+the following are popular methods of implementing access control policies:
+Mandatory access control
+discretionary access control
+attribute bassed access control
+role based access control
+rule bassed access control
+
+Mandatory Access control:
+A means of restricting access to system resources based on the sensitivity of the information contained in the system resource and the clearance of users to access
+the information 
+
+Discretionary Access Control:
+A means of restricting access to objects where the owner of the object has full control and is able to change the permissions of other users as they pertain to the
+object and its data - the controls are discretionary in the sense that accessibility is changed at the owners discretion
+
