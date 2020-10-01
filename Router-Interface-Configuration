@@ -1,0 +1,19 @@
+check the status of your routers:
+list
+
+to access a router:
+telnet $ip 2000
+
+By default, we are placed in the User EXEC Mode and to make any configuration, we need to move to the Privilege EXEC Mode.
+
+To get to the Privilege EXEC mode, we need to type the following command in the current console and press ENTER:
+enable
+
+To begin our configuration, we need to go into the global configuration mode. The command to achieve this is:
+configure terminal
+
+It is always a good practice to change the hostname of any device you are newly configuring.
+hostname ISP_RTR
+
+Now, we will configure an IP address of 192.0.2.1 (prefix length /30) on this interface. This can be achieved using the following command:
+ip address 192.0.2.1 255.255.255.252
