@@ -1,0 +1,8 @@
+if we want to slow our scan down we would use the -T option to specify one of these canned speeds
+nmap -sT $ip -p 21,80 -T sneaky
+
+nmap allows you to specify your scan delay speed using the --scan-delay option
+nmap -sT $ip -p 21,80 --scan-delay 5s
+
+we can also pass the speed argument in the form of milliseconds 
+nmap -sT skillsetlocal.com -p 21,80 --scan-delay 5ms
