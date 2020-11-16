@@ -444,6 +444,11 @@ send a fake mail to root user using sendmail command:
 
 SNMP 
 
+first things first is get the community strings
+
+
+
+
 
 onesixtyone -c /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings-onesixtyone.txt -dd 10.11.1.241
 
