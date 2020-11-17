@@ -1,0 +1,2 @@
+connect scan
+nmap -sT <host> 
