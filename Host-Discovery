@@ -1,0 +1,15 @@
+resolve a given IP address or range of IP addresses to a host name:
+nmap -sL 10.0.128.0/24
+
+disover other hosts on the network:
+netdiscover -r 10.0.0.0/24
+
+use hping3 to disover live hosts on a network:
+sudo hping3 -I lo -S skillsetlocal.com -p 80 
+
+check for more then one port:
+hping3 -I lo -S skillsetlocal.com --scan 1-81
+
+spoof ip packets with hping3:
+sudo hping3 -I lo -a <spoofed ip> -S <domain> -p <port>
+
