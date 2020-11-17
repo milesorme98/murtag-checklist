@@ -1,2 +1,27 @@
 connect scan
 nmap -sT <host> 
+
+
+delayed sneaky scanning:
+nmap -sT <host> -p 21,80 -T sneaky 
+
+set time to insane to set off IDS:
+nmap -sT skillsetlocal.com -p 21,80 -T insane 
+
+enter in a scan delay in this example its 5 seconds:
+nmap -sT skillsetlocal.com -p 21,80 --scan-delay 5s
+
+syn scan or stealthy scan:
+nmap -sS <host>
+
+fin scan:
+sudo nmap -sF skillsetlocal.com
+
+decoy scan or spoof scan:
+sudo nmap -sS -p 80 skillsetlocal.com -D 10.10.10.10
+
+if icmp pings are off use this sort of scan:
+sudo nmap -sn -PE -PP skillsetlocal.com --send-ip
+
+make nmap use Subnet Mask Requests:
+sudo nmap -sn -PE -PM skillsetlocal.com --send-ip
