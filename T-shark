@@ -3,3 +3,6 @@ tshark -i lo -f "tcp port 80" -V | more
 
 listen for udp packets on port 53 on the loopback interface:
 tshark -i lo -f "udp port 53" -V | more
+
+filter the traffic to only show packets related to out target address and port number:
+sudo tshark -i lo host skillsetlocal.com and port 80 
