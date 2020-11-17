@@ -152,6 +152,11 @@ the pentester should know how to discover it. In this book you can find explaine
 banner grab:
 nmap -sV --script=banner $ip
 
+bannergrab:
+telnet <ip> <port>
+then:
+HEAD / HTTP/1.0
+
 get the title of the webapp runinng check <title> tags:
 curl http://$ip/
 
