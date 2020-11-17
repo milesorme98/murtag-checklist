@@ -1,0 +1,10 @@
+lynis is a tool for auditing linux servers
+
+to run all checks:
+sudo lynis -c 
+
+run a non privileged scan:
+sudo lynis --pentest
+
+quiet stealthy scan:
+sudo lynis --pentest -q -Q
