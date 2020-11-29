@@ -68,7 +68,8 @@ ps -ef
 see what cron jobs are scheduled by the user:
 crontab -l
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-FILE PERMISSIONS  
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ESCALATION VIA WEAK FILE PERMISSIONS  
 
 the following command will look for files (and not symlinks etc) which is world writeable:
 find / -not -type l -perm o+w
@@ -86,6 +87,11 @@ The users are classified in UGO
 U - User
 G - Group
 O - others
+
+look at the permissions of interesting files:
+ls -la 
+
+
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 UNDERSTANDING PERMISSIONS IN LINUX 
