@@ -445,14 +445,15 @@ telnet 192.186.235.3 25
 send a fake mail to root user using sendmail command:
 ​sendemail -f admin@attacker.xyz -t root@victim-1 -s 192.186.235.3 -u Fakemail -m "Hi root, a fake from admin" -o tls=no
 
+nmap --script smtp-enum-users.nse 10.10.10.7
+
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 
 SNMP 
 
 first things first is get the community strings
-
-
-
 
 
 onesixtyone -c /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings-onesixtyone.txt -dd 10.11.1.241
