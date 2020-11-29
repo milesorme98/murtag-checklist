@@ -44,11 +44,21 @@ ps aux | grep root
 check history:
 history
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-AUTOMATED TOOLS
+ESCALATION VIA STOREED PASSWORDS
 
+check the history command:
+history
 
+check the bash_history:
+cat .bash_history
 
+good resource:
+https://github.com/swisskyrepo/PayloadsAllTheThings
 
+find the word password in the directory you are currently in:
+find . -type f -exec grep -i -I "PASSWORD" {} /dev/null \;
+
+history | grep password
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CRON JOBS
 
