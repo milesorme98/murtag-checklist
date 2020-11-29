@@ -1,11 +1,57 @@
-                                                   CRON JOBS
+                                                                  System Enumeration
+
+enumerate the kernel:
+
+uname -a
+
+cat /proc/version
+
+cat/etc/issue
+
+take a look at the architexture
+lscpu
+
+enumerate the running services:
+ps aux
+
+see what users are runnng what tasks:
+ps aux | grep root
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                              User Enumeration
+ 
+ figure out what user you are:
+ whoami
+ 
+ id 
+ *pay attention to what user groups your user is in as well 
+ 
+ look for what privileges are user might have:
+ sudo -l
+ 
+ see what users are on the box:
+ cat /etc/passwd
+ 
+ pull down just the users from etc passwd:
+ cat /etc/passwd | cut -d : -f 1
+ 
+ see if we have access to /etc/shadow:
+ cat /etc/shadow 
+ 
+ can we access the /etc/group file:
+ cat /etc/group
+ 
+check history:
+history
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CRON JOBS
 see if cron jobs are runnng: (by looking into the process's)
 ps -ef
 
 see what cron jobs are scheduled by the user:
 crontab -l
------------------
-                                                 File permissions 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+File permissions 
 
 the following command will look for files (and not symlinks etc) which is world writeable:
 find / -not -type l -perm o+w
@@ -24,8 +70,9 @@ U - User
 G - Group
 O - others
 
--------------------
-                                            Understanding permissions in linux 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                          
+Understanding permissions in linux 
 
 At a basic level permissions in linux are a relationship between users, groups, and files & directories.
 
@@ -89,7 +136,7 @@ Setgid (SGID) bit
 when set on a file, the file will get executed with the privieleges of the file group
 
 when set on  directory, files created within that directory will inherit the group of the directory itself
--------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 KERNEL EXPLOITS
 
 Kernels are the core of any OS
@@ -110,7 +157,7 @@ searchsploit linux kernel 2.6 debian priv esc
 
 SCRIPTS FOR EXPLOITING KERNEL VULNERABILITIES:
 linux-exploit-suggester.sh
-----------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Service Exploits
 
 services are simply programs that run in the background, accepting input or performing regular tasks
@@ -119,7 +166,7 @@ if vulnerable services are running as root, exploiting them can lead to command 
 
 service exploits can be found using Searchsploit, Google, and Github, just like with kernel exploits
 
------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 WEAK FILE PERMISSIONS 
 
 certain system fies can be takn advantage of to perform privilege escalation if the permissions on them are too weak
@@ -138,7 +185,7 @@ if we are able o read the contents of the /etc/shadow file, we might be able to 
 if we are able to modify the /etc/shadow file we can replace the rot user's password hash with one we know.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                    SUDO
+SUDO
                                                                     
 sudo is a program which lets users run other programs with the security privileges of other users. By default that oher user will be root
 
@@ -212,7 +259,7 @@ ld_preload will not work if the real user ID is different from the Effective use
 sudo must be configured to preserve the LD_PRELOAD environment variable using the env_keep option
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                                  CRON JOBS
+CRON JOBS
 
 cron jobs are programs or scripts which users can schedual to run at specific times ot intervals 
 
@@ -242,42 +289,3 @@ the PATH variable can be overwritten in the crontab file
 
 if a cron job program/script does not use an apsolut path and one of the PATH directories is writeable by our user, we may be able to creat a program/script
 with the same name as the cron job 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
