@@ -1,6 +1,6 @@
 High Level Overview Things to look for 
-
-Web Apps 
+--------------------------------------
+WEB APPS 
 
 Exploits
 LFI
@@ -11,3 +11,5 @@ default credentials
 
 Check the source code
 
+--------------------------------------
+SMB
