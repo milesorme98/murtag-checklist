@@ -325,6 +325,10 @@ get the os version of smba server using rpcclient:
 rpcclient -U "" -N $ip
 > srvinfo
 
+find the netbios computer name using nmblookup
+nmb
+
+
 get the OS version of samba using enum4linux:
 enum4linux -o $ip
 
