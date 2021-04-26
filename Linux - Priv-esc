@@ -17,6 +17,8 @@ ps aux
 see what users are runnng what tasks:
 ps aux | grep root
 
+list running processes
+ps -ef
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
  USER ENUMERATION
  
@@ -317,27 +319,3 @@ the PATH variable can be overwritten in the crontab file
 if a cron job program/script does not use an apsolut path and one of the PATH directories is writeable by our user, we may be able to creat a program/script
 with the same name as the cron job 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
