@@ -105,6 +105,9 @@ sudo -V | grep "Sudo ver" | grep "1.6.8p9\|1.6.9p18\|1.8.14\|1.8.20\|1.6.9p21\|1
 figure out what cronjobs your user has access to:
 crontab -l 
 
+list running processes to see if cron is running
+ps -ef
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                       File Permissions
 there are three types of file permissions in unix
@@ -122,38 +125,3 @@ dont forget to check what users are in what groups:
 cat /etc/group
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
