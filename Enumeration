@@ -459,6 +459,10 @@ The command gpp-decrypt helps decrypt strings
 With smbclient mget* downloads every file
 Smbmap -d active.htb -u svc_tgs -p password -H 10.10.10.100 - this command will log in with the username and password specified 
 
+SMB DICTIONAIRY ATTACK 
+
+
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 SMTP
 
