@@ -639,6 +639,21 @@ nc -vn <IP> 22
 public ssh key of server
 ssh-keyscan -t rsa <IP> -p <PORT>
 
+fetch pre-login SSH banner:
+ssh root@ip
+
+How many “encryption_algorithms” are supported by the SSH server
+nmap --script ssh2-enum-algos $ip
+
+What is the ssh-rsa host key being used by the SSH server.
+nmap --script ssh-hostkey --script-args ssh_hostkey=full $ip
+
+Which authentication method is being used by the SSH server for user “student”
+nmap -p 22 --script ssh-auth-methods --script-args="ssh.user=student" $ip
+
+Fetch the flag from /home/student/FLAG by using nmap ssh-run script.
+nmap -p 22 --script=ssh-run --script-args="ssh-run.cmd=cat /home/student/FlAG, ssh-run.username=student,ssh-run.password=" $ip
+
 config files:
 ssh_config
 sshd_config
