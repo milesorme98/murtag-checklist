@@ -309,14 +309,32 @@ https://haiderm.com/linux-privilege-escalation-using-weak-nfs-permissions/
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 SMB
 
+NMAP
+
 smb vuln scan:
 nmap -Pn --script=smb-vuln* $ip
+
+check for vulnerabilities:
+nmap --script smb-vuln* -p 139,445 $ip
 
 enumerate shares with nmap:
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse $ip
 
 discover the version of samba running:
 nmap -Pn -p 139,445 -v --script="smb-protocols" -sV $ip
+
+scanning for smb shares with nmap:
+nmap --script smb-enum-shares.nse -p445 $ip
+
+scanning for smb shares with nmap:
+nmap --script smb-enum-shares.nse -p445 $ip
+
+list all users that exsist on a samba server with nmap
+nmap --script smb-enum-users.nse -p445 $ip
+
+smb os discovery:
+nmap $ip --script=smb-os-discovery
+nmap -sV -Pn -vv -p 445 --script='(smb*) and not (brute or broadcast or dos or external or fuzzer)' --script-args=unsafe=1 $ip
 
 discovering the version of samba running:
 nmap --script smb-os-discovery.nse -p 445 $ip
@@ -325,42 +343,42 @@ get the os version of smba server using rpcclient:
 rpcclient -U "" -N $ip
 > srvinfo
 
-find the netbios computer name using nmblookup
-nmb
-
-
-get the OS version of samba using enum4linux:
-enum4linux -o $ip
-
 find the netbios computer name of samba using nmblookup:
 nmblookup -A $ip
-
-test weather anonymous connection is allowed:
-smbclient -L $ip -N
-
-scanning for smb shares with nmap:
-nmap --script smb-enum-shares.nse -p445 $ip
-
-listing shares with enum4linux:
-enum4linux -S $ip
-
-scanning for smb shares:
-smbmap -H $ip
 
 Downloadig files from a share:
 smbget -R smb://<ip>/anonymous
 
-connecting to an smbshare:
-smbclient //$ip/$share
+ENUM4LINUX
 
 enum4linux: 
 enum4linux -a $ip
 
+get OS version of samba using enum4linux:
+enum4linux -o $ip
+
 get domain groups that exsist on the samba server using enum4linux:
 enum4linux -G $ip
 
+get the OS version of samba using enum4linux:
+enum4linux -o $ip
+
+listing shares with enum4linux:
+enum4linux -S $ip
+
+SMBCLIENT
+
+test weather anonymous connection is allowed:
+smbclient -L $ip -N
+
 get shares:
 smbclient -L \\\\<victim-ip> -N
+
+connecting to an smbshare:
+smbclient //$ip/$share
+
+find the server description of samba server using smbclient
+smbclient -L $ip -N
 
 connect to a share:
 smbclient \\\\<victim-ip>\\<share>
@@ -368,19 +386,8 @@ smbclient \\\\<victim-ip>\\<share>
 connect to a share:
 smbclient //<victim-ip>/<share>
 
-smb os discovery:
-nmap $ip --script=smb-os-discovery
-
-nmap -sV -Pn -vv -p 445 --script='(smb*) and not (brute or broadcast or dos or external or fuzzer)' --script-args=unsafe=1 $ip
-
 enumerate hostname:
 nmblookup -A 10.11.1.115
-
-enumerate shares:
-nmap --script smb-enum-shares -p 139,445 $ip
-
-check for vulnerabilities:
-nmap --script smb-vuln* -p 139,445 10.11.1.115
 
 manually probe an smbserver:
 rpcclient -U '' $ip
@@ -411,7 +418,12 @@ smbmap [-u "username" -p "password"] -r [Folder] -H <IP> [-P <PORT>] # Non-Recur
 smbmap -u "username" -p "<NT>:<LM>" [-r/-R] [Folder] -H <IP> [-P <PORT>] #Pass-the-Hash
 
 SMBMAP
-Smbmap -H 10.10.10.100 list all the file shares and what permissions we have 
+
+scanning for smb shares:
+smbmap -H $ip
+
+list all the file shares and what permissions we have:
+Smbmap -H 10.10.10.100 
 
 Smbmap -F will help you search for strings in files
 
