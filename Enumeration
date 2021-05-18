@@ -351,7 +351,7 @@ smbget -R smb://<ip>/anonymous
 
 ENUM4LINUX
 
-enum4linux: 
+enum4linux all info enum: 
 enum4linux -a $ip
 
 get OS version of samba using enum4linux:
@@ -365,6 +365,9 @@ enum4linux -o $ip
 
 listing shares with enum4linux:
 enum4linux -S $ip
+
+list all users that exsist on the samba server:
+enum4linux -U $ip
 
 SMBCLIENT
 
@@ -389,13 +392,26 @@ smbclient //<victim-ip>/<share>
 enumerate hostname:
 nmblookup -A 10.11.1.115
 
-manually probe an smbserver:
+RPCCLIENT
+
+manually probe an smbserver with rpclient:
 rpcclient -U '' $ip
 password:
-rpcclient $> srvinfo # operating system version
-rpcclient $> netshareenumall # enumerate all shares and its paths
-rpcclient $> enumdomusers # enumerate usernames defined on the server
-rpcclient $> getdompwinfo # smb password policy configured on the server
+
+operating system version
+rpcclient $> srvinfo
+
+enumerate all shares and its paths:
+rpcclient $> netshareenumall
+
+enumerate usernames defined on the server
+rpcclient $> enumdomusers 
+
+smb password policy configured on the server
+rpcclient $> getdompwinfo 
+
+find SID of user "admin" using rpcclient
+rpcclient $> lookupnames admin
 
 list shared folders:
 smbclient --no-pass -L //<IP> # Null user
