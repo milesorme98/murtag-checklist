@@ -413,6 +413,9 @@ rpcclient $> getdompwinfo
 find SID of user "admin" using rpcclient
 rpcclient $> lookupnames admin
 
+Find domain groups that exist on the samba server by using rpcclient:
+rpcclient $> enumdomgroups
+
 list shared folders:
 smbclient --no-pass -L //<IP> # Null user
 smbclient -U 'username[%passwd]' -L [--pw-nt-hash] //<IP> #If you omit the pwd, it will be prompted. With --pw-nt-hash, the pwd provided is the NT hash
