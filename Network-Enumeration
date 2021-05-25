@@ -468,7 +468,7 @@ SMTP
 
 smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/top-usernames-shortlist.txt -t $ip
 
-always connect with netcat to view relevant information:
+Connect to SMTP service using netcat and retrieve the hostname of the server (domain name):
 nc $ip $port
 
 enumerating users:
