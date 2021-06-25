@@ -1,0 +1,3 @@
+put wireless card into monitor mode:
+airmon-ng start wlan0
+
