@@ -1,0 +1,10 @@
+Get current domain:
+Get-ADDomain
+
+Get object of anothet domain:
+Get-ADDomain -Identity target.local
+
+Get domain SID for the current domain:
+(Get-ADDomain).DomainSID
+
+
